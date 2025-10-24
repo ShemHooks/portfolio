@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+body {
+  box-sizing: border-box;
+}
+
+/* Glassmorphism and glow styles */
+.glassmorphism {
+  background: rgba(15, 23, 42, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glow-border {
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.text-glow {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.divider-glow {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #00d4ff,
+    #8b5cf6,
+    transparent
+  );
+  height: 2px;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.skill-icon {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 255, 0.2),
+    rgba(139, 92, 246, 0.2)
+  );
+  border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+}
+
+.holographic {
+  background: linear-gradient(
+    45deg,
+    rgba(0, 212, 255, 0.1) 0%,
+    rgba(139, 92, 246, 0.1) 50%,
+    rgba(0, 212, 255, 0.1) 100%
+  );
+}
