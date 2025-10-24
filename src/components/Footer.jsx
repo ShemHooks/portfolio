@@ -18,9 +18,7 @@ export default function Footer() {
             </button>
           </div>
         </div>
-        <p className="text-gray-500 text-sm mt-8">
-          © 2030 Alex Chen. Crafted with quantum precision.
-        </p>
+        <p className="text-gray-500 text-sm mt-8">Shem Regidor</p>
       </div>
     </footer>
   );
