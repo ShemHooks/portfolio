@@ -8,9 +8,9 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="relative min-h-screen bg-[#0a0a1f] text-white font-cyber overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#000000] text-white font-cyber overflow-x-hidden">
       {/* Static background pattern */}
-      <div className="fixed inset-0 pointer-events-none">
+      {/* <div className="fixed inset-0 pointer-events-none">
         <div
           className="absolute inset-0 opacity-20"
           style={{
@@ -20,6 +20,20 @@ function App() {
             backgroundPosition: "0 0, 25px 25px",
           }}
         />
+      </div> */}
+
+      <div className="lines-bg">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="line"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${2 + Math.random() * 4}s`,
+            }}
+          />
+        ))}
       </div>
 
       <main className="relative z-10">

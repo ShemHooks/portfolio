@@ -9,18 +9,18 @@ export default function Footer() {
   };
 
   return (
-    <footer className="py-12 px-6 border-t border-gray-800">
+    <footer className="px-6 py-12 border-t border-gray-800">
       <div className="max-w-6xl mx-auto text-center">
-        <div className="glassmorphism rounded-2xl p-8">
-          <h3 className="text-2xl font-bold mb-4 text-cyber-blue">
+        <div className="p-8 glassmorphism rounded-2xl">
+          <h3 className="mb-4 text-2xl font-bold text-cyber-blue">
             Ready to Build the Future?
           </h3>
-          <p className="text-gray-300 mb-6">
+          <p className="mb-6 text-gray-300">
             Let's collaborate on your next revolutionary project
           </p>
           <div className="flex justify-center space-x-6">
             <button
-              className="px-6 py-3 bg-gradient-to-r from-cyber-blue to-cyber-purple rounded-lg font-medium hover:shadow-lg hover:shadow-cyber-blue/25 transition-all duration-300 cursor-pointer"
+              className="px-6 py-3 font-medium transition-all duration-300 rounded-lg cursor-pointer bg-gradient-to-r from-cyber-blue to-cyber-purple hover:shadow-lg hover:shadow-cyber-blue/25"
               onClick={clickedContactMe}
             >
               Contact Me
@@ -28,13 +28,13 @@ export default function Footer() {
             <a
               href={cv}
               download="Shem-Regidor-CV.pdf"
-              className="px-6 py-3 border border-cyber-blue text-cyber-blue rounded-lg font-medium hover:bg-cyber-blue hover:bg-opacity-10 transition-all duration-300 cursor-pointer inline-block"
+              className="inline-block px-6 py-3 font-medium transition-all duration-300 border rounded-lg cursor-pointer border-cyber-blue text-cyber-blue hover:bg-cyber-blue hover:bg-opacity-10"
             >
               Download CV
             </a>
           </div>
         </div>
-        <p className="text-gray-500 text-sm mt-8">Shem Regidor</p>
+        <p className="mt-8 text-sm text-gray-500">Shem Mayo Regidor</p>
       </div>
     </footer>
   );

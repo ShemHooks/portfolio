@@ -53,3 +53,29 @@ body {
     rgba(0, 212, 255, 0.1) 100%
   );
 }
+
+.lines-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.line {
+  position: absolute;
+  width: 2px;
+  height: 120vh;
+  background: linear-gradient(to bottom, transparent, #00d4ff, transparent);
+  opacity: 0.4;
+  animation: drop 3s linear infinite;
+}
+
+@keyframes drop {
+  0% {
+    transform: translateY(-120vh);
+  }
+  100% {
+    transform: translateY(120vh);
+  }
+}
