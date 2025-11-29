@@ -25,7 +25,7 @@ export default function Projects() {
     },
     {
       img: dts,
-      title: "Document Tracking System",
+      title: "Document Management System",
       desc: "Digital document management system for the city hall to improve workflow efficiency.",
       tags: ["Vue.js", "Laravel", "MySQL"],
       timeline: "July 2025 - October 2025",
