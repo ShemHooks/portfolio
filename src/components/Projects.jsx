@@ -32,7 +32,7 @@ export default function Projects() {
       action: () =>
         setModal({
           isOpen: true,
-          title: "Document Tracking System",
+          title: "Document Management System",
           message:
             "The Document Management System is not yet available to the public. Access is restricted to authorized users from the Kabankalan City Hall to ensure system security and integrity.",
         }),
