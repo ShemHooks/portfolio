@@ -3,6 +3,7 @@ import kcera from "../assets/projects/kcera.jpg";
 import iskolarhub from "../assets/projects/iskolarhub.png";
 import dts from "../assets/projects/dts.png";
 import Modal from "../components/Modal";
+import { FaGithub } from "react-icons/fa";
 
 export default function Projects() {
   const [modal, setModal] = useState({ isOpen: false, title: "", message: "" });
@@ -14,10 +15,12 @@ export default function Projects() {
       desc: "Kabankalan City Emergency Response Application for real-time reporting and response tracking.",
       tags: ["React Native", "React", "Laravel", "Node", "MySQL"],
       timeline: "Feb 2025 - Nov 2025",
+      githublink: "https://github.com/ShemHooks/KCERA",
       layout: "horizontal",
       action: () =>
         setModal({
           isOpen: true,
+
           title: "KCERA",
           message:
             "KCERA has not yet been deployed as it is currently undergoing approval with the city administration.",
@@ -43,6 +46,7 @@ export default function Projects() {
       desc: "A platform that helps students search and apply for scholarships effectively.",
       tags: ["Next", "DrizzleORM", "PostgreSQL"],
       timeline: "Nov 2025 - Present",
+      githublink: "https://github.com/ShemHooks/IskolarHub",
       note: "Under development",
       action: () =>
         window.open("https://iskolar-hub-k874.vercel.app/", "_blank"),
@@ -103,7 +107,16 @@ export default function Projects() {
                     </span>
                   ))}
                 </div>
-
+                {proj.githublink && (
+                  <div>
+                    <a
+                      href={proj.githublink}
+                      className="flex items-center gap-2"
+                    >
+                      <FaGithub className="text-lg" /> Source Code
+                    </a>
+                  </div>
+                )}
                 <button
                   onClick={proj.action}
                   className="w-full py-3 font-medium transition-all duration-300 rounded-lg bg-gradient-to-r from-cyber-blue to-cyber-purple hover:shadow-lg hover:shadow-cyber-blue/25"

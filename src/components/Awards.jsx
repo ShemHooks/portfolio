@@ -4,7 +4,7 @@ import AwardCard from "../components/AwardCard";
 
 export default function Awards() {
   return (
-    <section className="px-6 py-20 ">
+    <section className="px-6 py-20">
       <div className="mx-auto max-w-10xl">
         <h2 className="mb-16 text-4xl font-bold text-center text-cyber-blue text-glow">
           AWARDS
