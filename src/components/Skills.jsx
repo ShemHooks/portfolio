@@ -21,6 +21,7 @@ import postgre from "../assets/stack/postgre.svg";
 // tools
 import git from "../assets/stack/git.svg";
 import github from "../assets/stack/github.svg";
+import expo from "../assets/stack/expo.png";
 
 export default function Skills() {
   const skillCategories = [
@@ -63,6 +64,7 @@ export default function Skills() {
       items: [
         { img: git, label: "Git" },
         { img: github, label: "GitHub", invert: true },
+        { img: expo, label: "Expo", invert: true },
       ],
     },
   ];

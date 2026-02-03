@@ -2,6 +2,7 @@ import { useState } from "react";
 import kcera from "../assets/projects/kcera.jpg";
 import iskolarhub from "../assets/projects/iskolarhub.png";
 import dts from "../assets/projects/dts.png";
+import su from "../assets/projects/su.png";
 import Modal from "../components/Modal";
 import { FaGithub } from "react-icons/fa";
 
@@ -32,13 +33,7 @@ export default function Projects() {
       desc: "Digital document management system for the city hall to improve workflow efficiency.",
       tags: ["Vue.js", "Laravel", "MySQL"],
       timeline: "July 2025 - October 2025",
-      action: () =>
-        setModal({
-          isOpen: true,
-          title: "Document Management System",
-          message:
-            "The Document Management System is not yet available to the public. Access is restricted to authorized users from the Kabankalan City Hall to ensure system security and integrity.",
-        }),
+      action: () => window.open("https://lgukabdms.online/", "_blank"),
     },
     {
       img: iskolarhub,
@@ -49,7 +44,21 @@ export default function Projects() {
       githublink: "https://github.com/ShemHooks/IskolarHub",
       note: "Under development",
       action: () =>
-        window.open("https://iskolar-hub-k874.vercel.app/", "_blank"),
+        setModal({
+          isOpen: true,
+
+          title: "KCERA",
+          message: "IskolarHub is currently under development.",
+        }),
+    },
+    {
+      img: su,
+      title: "SpeakUp",
+      desc: "A platform that allows residents to file complaints and share their ideas with their local government unit (LGU).",
+      tags: ["Next", "DrizzleORM", "PostgreSQL"],
+      timeline: "January 12, 2026 - Janaury 28, 2026",
+      githublink: "https://github.com/ShemHooks/speakup",
+      action: () => window.open("https://speakup-iota.vercel.app/", "_blank"),
     },
   ];
 
