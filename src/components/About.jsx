@@ -20,10 +20,10 @@ export default function About() {
                 only solves today’s challenges but anticipates tomorrow’s
                 opportunities.
               </p>
-              <p className="leading-relaxed text-gray-300">
+              {/* <p className="leading-relaxed text-gray-300">
                 I believe in writing code that not only solves today's problems
                 but anticipates tomorrow's challenges.
-              </p>
+              </p> */}
             </div>
             <div className="p-8 text-center holographic rounded-xl">
               <div className="mb-4 text-6xl">
