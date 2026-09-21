@@ -79,3 +79,19 @@ body {
     transform: translateY(120vh);
   }
 }
+
+/* Scroll-driven Three.js morph layer */
+.morph-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.72;
+  mask-image: radial-gradient(circle at center, black 0%, rgba(0,0,0,.85) 48%, transparent 92%);
+}
+
+.lines-bg-soft { opacity: 0.28; }
+
+@media (prefers-reduced-motion: reduce) {
+  .morph-canvas, .lines-bg { display: none; }
+}

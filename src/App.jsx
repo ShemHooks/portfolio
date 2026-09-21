@@ -5,6 +5,7 @@ import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Awards from "./components/Awards";
 import Footer from "./components/Footer";
+import MorphBackground from "./components/MorphBackground";
 
 function App() {
   return (
@@ -22,7 +23,9 @@ function App() {
         />
       </div> */}
 
-      <div className="lines-bg">
+      <MorphBackground />
+
+      <div className="lines-bg lines-bg-soft">
         {[...Array(20)].map((_, i) => (
           <div
             key={i}

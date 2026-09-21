@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 import Modal from "../components/Modal";
 
@@ -139,9 +140,14 @@ export default function Projects() {
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((proj, i) => (
-            <div
-              key={i}
-              className="flex flex-col overflow-hidden transition-all duration-300 glassmorphism rounded-2xl project-card"
+            <motion.div
+              key={proj.title}
+              initial={{ opacity: 0, y: 45, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.18 }}
+              transition={{ duration: 0.55, delay: (i % 3) * 0.08 }}
+              whileHover={{ y: -8, scale: 1.015 }}
+              className="flex flex-col overflow-hidden glassmorphism rounded-2xl project-card"
             >
               {/* Project Image */}
               <img
@@ -205,7 +211,7 @@ export default function Projects() {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
