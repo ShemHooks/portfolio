@@ -85,10 +85,7 @@ export default function Projects() {
       timeline: "August 28, 2026",
       githublink: "https://github.com/ShemHooks/welcome-to-Kabankalan",
       action: () =>
-        window.open(
-          "https://github.com/ShemHooks/welcome-to-Kabankalan",
-          "_blank",
-        ),
+        window.open("https://welcome-to-kabankalan.vercel.app/", "_blank"),
     },
 
     {
