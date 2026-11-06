@@ -1,16 +1,33 @@
-# React + Vite
+# Shem Regidor — Premium Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A premium editorial-style React/Vite portfolio redesign inspired by the visual direction supplied by the owner, with original styling and layout.
 
-Currently, two official plugins are available:
+## Run
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+## Production
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm run build
+npm run preview
+```
 
-## Expanding the ESLint configuration
+## Customize
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `src/App.jsx`: projects, experience, skill list, links, contact details
+- `src/index.css`: design system, responsive styles, typography
+- `src/assets/projects/`: existing project screenshots
+- `src/assets/cv.pdf`: replace with your latest resume
+
+The hero uses a CSS-generated typographic graphic rather than a portrait; add your own photo if desired.
+Review project descriptions, public links, experience dates, and contact email before publishing.
+
+This package excludes node_modules and Git history. Copy it into a new folder, or back up your existing repository before replacing source files.
+
+
+## November 2026 content update
+Added Smart Activity, ApusFly, AgriTimbang, Al Nakhailan, and Ishabella projects, mobile mockup previews for KCERA and ApusFly, five experience roles, GoDaddy skills, and separate live/GitHub links. Project images are sourced from supplied screenshots. Verify experience dates and public repository visibility before publishing.
