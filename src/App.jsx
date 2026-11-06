@@ -25,6 +25,7 @@ import icon from "./assets/icon.png";
 import iskolarhub from "./assets/projects/iskolarhub.png";
 import su from "./assets/projects/su.png";
 import kab from "./assets/projects/kab.png";
+import DeveloperJournal from "./components/DeveloperJournal";
 import "./index.css";
 
 const work = [
@@ -201,6 +202,7 @@ export default function App() {
   const [menu, setMenu] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
   const visibleWork = showAllProjects ? work : work.slice(0, 3);
+
   return (
     <div className="site">
       <header className="header">
@@ -220,8 +222,9 @@ export default function App() {
             ["WORK", "#work"],
             ["EXPERIENCE", "#experience"],
             ["STACK", "#stack"],
-            ["CONTACT", "#contact"],
             ["ACHIEVEMENTS", "#achievements"],
+            ["JOURNAL", "#journal"],
+            ["CONTACT", "#contact"],
           ].map(([a, b]) => (
             <a key={a} href={b} onClick={() => setMenu(false)}>
               {a}
@@ -559,7 +562,7 @@ export default function App() {
 
         <section className="achievements section" id="achievements">
           <div className="section-heading">
-            <span className="eyebrow">04 / ACHIEVEMENTS</span>
+            <span className="eyebrow">05 / ACHIEVEMENTS</span>
             <span className="rule" />
             <span className="small-count">2023 — 2026</span>
           </div>
@@ -594,8 +597,9 @@ export default function App() {
           </div>
         </section>
 
+        <DeveloperJournal />
         <section className="contact section" id="contact">
-          <span className="eyebrow">05 / CONTACT</span>
+          <span className="eyebrow">07 / CONTACT</span>
           <Reveal>
             <p>HAVE A PROJECT IN MIND?</p>
             <h2>

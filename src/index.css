@@ -1317,3 +1317,371 @@ body,
     margin-bottom: 40px;
   }
 }
+
+/* ==========================================
+   DEVELOPER JOURNAL
+   ========================================== */
+
+.journal-intro {
+  max-width: 620px;
+  margin: 0 0 48px;
+  color: #a1a1a1;
+  line-height: 1.8;
+}
+
+/* Featured Article */
+.journal-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  border: 1px solid #292929;
+  background: #0c0c0c;
+}
+
+/* Article Cover */
+.journal-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  min-width: 0;
+  background: #050505;
+  border-right: 1px solid #292929;
+}
+
+.journal-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 360px;
+  object-fit: contain;
+}
+
+/* Article Content */
+.journal-feature-content {
+  padding: clamp(24px, 4vw, 54px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.journal-feature-content h3 {
+  font-size: clamp(26px, 3.1vw, 44px);
+  line-height: 1.13;
+  letter-spacing: -0.045em;
+  margin: 22px 0;
+  color: #f2f0eb;
+}
+
+.journal-feature-content p {
+  color: #aaa;
+  line-height: 1.85;
+  margin: 0 0 24px;
+}
+
+/* Technology Tags */
+.journal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 30px;
+}
+
+.journal-tags span {
+  border: 1px solid #333;
+  color: #aaa;
+  padding: 8px 12px;
+  font: 11px monospace;
+}
+
+/* Read Article Button */
+.journal-read {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 1px solid #eee;
+  background: transparent;
+  color: #f2f0eb;
+  font: 700 12px monospace;
+  letter-spacing: 0.13em;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.journal-read:hover {
+  color: #aaa;
+}
+
+/* Expanded Article */
+.journal-article {
+  max-width: 850px;
+  margin: 56px auto 0;
+  padding: clamp(24px, 5vw, 64px);
+  border: 1px solid #292929;
+  background: #0c0c0c;
+  color: #ccc;
+}
+
+.journal-article h3 {
+  color: #f2f0eb;
+  font-size: clamp(28px, 4vw, 46px);
+  line-height: 1.15;
+  margin: 20px 0 30px;
+}
+
+.journal-article h4 {
+  color: #f2f0eb;
+  font-size: 22px;
+  margin: 36px 0 12px;
+}
+
+.journal-article p {
+  line-height: 1.95;
+  margin: 0 0 22px;
+}
+
+/* Code Snippet */
+.journal-code {
+  max-width: 100%;
+  overflow-x: auto;
+  background: #050505;
+  border: 1px solid #333;
+  padding: 24px;
+  margin: 22px 0 28px;
+  color: #c8d9e8;
+  font: 13px/1.8 monospace;
+  tab-size: 4;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+@media (max-width: 760px) {
+  .journal-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .journal-cover {
+    border-right: 0;
+    border-bottom: 1px solid #292929;
+  }
+
+  .journal-cover img {
+    max-height: 260px;
+  }
+
+  .journal-feature-content {
+    padding: 26px;
+  }
+}
+
+/* FLOATING JOURNAL MODAL */
+
+.journal-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.journal-modal {
+  width: 100%;
+  max-width: 900px;
+  max-height: 90dvh;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #0c0c0c;
+  border: 1px solid #333;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.7);
+}
+
+.journal-modal-topbar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 28px;
+  border-bottom: 1px solid #292929;
+  background: #111;
+}
+
+.journal-modal-close {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #333;
+  background: #1b1b1b;
+  color: #f2f0eb;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.journal-modal-close:hover {
+  background: #f2f0eb;
+  color: #080808;
+}
+
+.journal-modal .journal-modal-body {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: clamp(24px, 5vw, 60px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #444 #111;
+}
+
+.journal-modal-body h3 {
+  font-size: clamp(28px, 4vw, 46px);
+  line-height: 1.15;
+  color: #f2f0eb;
+}
+
+.journal-modal-body h4 {
+  margin: 36px 0 14px;
+  font-size: 22px;
+  color: #f2f0eb;
+}
+
+.journal-modal-body p {
+  color: #aaa;
+  line-height: 1.9;
+  margin-bottom: 22px;
+}
+
+.journal-modal-body strong {
+  color: #f2f0eb;
+}
+
+.journal-modal-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  margin-bottom: 36px;
+  border: 1px solid #292929;
+  background: #050505;
+}
+
+.journal-modal-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+}
+
+.journal-modal .journal-code {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 24px;
+  background: #050505;
+  border: 1px solid #333;
+  color: #c8d9e8;
+  font:
+    13px/1.8 Consolas,
+    monospace;
+}
+
+.journal-modal-end {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid #333;
+}
+
+.journal-modal-end span {
+  font: 11px monospace;
+  color: #888;
+}
+
+.journal-modal-end button {
+  border: 0;
+  background: transparent;
+  color: #f2f0eb;
+  font: 700 12px monospace;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .journal-modal-overlay {
+    padding: 10px;
+  }
+
+  .journal-modal {
+    max-height: 94dvh;
+  }
+
+  .journal-modal-topbar {
+    padding: 12px 18px;
+  }
+
+  .journal-modal .journal-modal-body {
+    padding: 24px 20px;
+  }
+
+  .journal-modal .journal-code {
+    padding: 16px;
+    font-size: 11px;
+  }
+
+  .journal-modal-end {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Multiple Developer Journal cards */
+
+.journal-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.journal-list .journal-feature {
+  width: 100%;
+}
+
+.journal-article-quote {
+  margin: 30px 0;
+  padding: 18px 24px;
+  border-left: 2px solid #f2f0eb;
+  background: #141414;
+  color: #f2f0eb;
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+.journal-modal-cover figcaption {
+  margin-top: 12px;
+  color: #888;
+  font-size: 12px;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .journal-list {
+    gap: 20px;
+  }
+}
