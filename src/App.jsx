@@ -144,14 +144,15 @@ const work = [
 ];
 const skills = [
   "React / Next.js",
+  "Vue.js / Quasar",
   "TypeScript / JavaScript",
-  "Laravel / PHP",
+  "Laravel / PHP / Python",
   "Node.js / Express",
   "React Native / Expo",
   "MySQL / PostgreSQL",
-  "Docker / Git",
-  "REST APIs / RBAC",
-  "GoDaddy / DNS & Domains",
+  "Docker / Kubernetes",
+  "Git / Github",
+  "GoDaddy / Hostinger",
 ];
 
 const achievements = [
