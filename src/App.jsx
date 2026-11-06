@@ -153,6 +153,38 @@ const skills = [
   "REST APIs / RBAC",
   "GoDaddy / DNS & Domains",
 ];
+
+const achievements = [
+  {
+    n: "01",
+    title: "Programming Challenge Champion",
+    organization: "FBC Kabankalan",
+    date: "March 2023",
+    type: "COMPETITION",
+  },
+  {
+    n: "02",
+    title: "3rd Kabankalan Technovation Startup Competition Champion",
+    organization: "Kabankalan City",
+    date: "September 2025",
+    type: "STARTUP COMPETITION",
+  },
+  {
+    n: "03",
+    title: "Best Research Awardee",
+    organization: "Kabankalan Catholic College",
+    date: "May 2026",
+    type: "ACADEMIC RECOGNITION",
+  },
+  {
+    n: "04",
+    title: "Best Intern Awardee",
+    organization: "Kabankalan Catholic College",
+    date: "May 2026",
+    type: "INTERNSHIP RECOGNITION",
+  },
+];
+
 const Reveal = ({ children, className = "", delay = 0 }) => (
   <motion.div
     className={className}
@@ -188,6 +220,7 @@ export default function App() {
             ["EXPERIENCE", "#experience"],
             ["STACK", "#stack"],
             ["CONTACT", "#contact"],
+            ["ACHIEVEMENTS", "#achievements"],
           ].map(([a, b]) => (
             <a key={a} href={b} onClick={() => setMenu(false)}>
               {a}
@@ -522,6 +555,44 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        <section className="achievements section" id="achievements">
+          <div className="section-heading">
+            <span className="eyebrow">04 / ACHIEVEMENTS</span>
+            <span className="rule" />
+            <span className="small-count">2023 — 2026</span>
+          </div>
+
+          <Reveal>
+            <h2 className="section-title">
+              MILESTONES
+              <br />
+              <span>& RECOGNITION.</span>
+            </h2>
+          </Reveal>
+
+          <div className="achievements-list">
+            {achievements.map((achievement) => (
+              <Reveal key={achievement.n}>
+                <div className="achievement-row">
+                  <span className="achievement-number">{achievement.n}</span>
+
+                  <div className="achievement-details">
+                    <span className="eyebrow">{achievement.type}</span>
+                    <h3>{achievement.title}</h3>
+                    <p>{achievement.organization}</p>
+                  </div>
+
+                  <div className="achievement-date">
+                    <span>{achievement.date}</span>
+                    <FiArrowUpRight aria-hidden="true" />
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
         <section className="contact section" id="contact">
           <span className="eyebrow">05 / CONTACT</span>
           <Reveal>
