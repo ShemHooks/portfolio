@@ -4,8 +4,15 @@ import al_nakhailan from "./assets/projects/al-nakhailan.png";
 import agritimbang from "./assets/projects/agritimbang.png";
 import apusfly from "./assets/projects/apusfly.png";
 import smart_activity from "./assets/projects/smart-activity.png";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValueEvent,
+  useReducedMotion,
+  useSpring,
+} from "framer-motion";
 import {
   FiArrowUpRight,
   FiArrowDown,
@@ -198,10 +205,163 @@ const Reveal = ({ children, className = "", delay = 0 }) => (
     {children}
   </motion.div>
 );
+
+function CinematicProject({
+  project: p,
+  index,
+  total,
+  progress,
+  reducedMotion,
+  activeIndex,
+}) {
+  const opacity = useTransform(progress, (value) => {
+    const position = value * (total - 1);
+    return Math.max(0, Math.min(1, 1 - Math.abs(position - index)));
+  });
+
+  return (
+    <motion.div
+      className="cinematic-project-card"
+      style={reducedMotion ? undefined : { opacity }}
+      aria-hidden={!reducedMotion && activeIndex !== index ? true : undefined}
+      inert={!reducedMotion && activeIndex !== index}
+    >
+      <article className="project">
+        <div
+          className={`project-visual ${
+            p.mobile ? "project-visual-mobile" : ""
+          }`}
+        >
+          <div className={p.mobile ? "phone-frame" : "project-image-frame"}>
+            <img
+              src={p.img}
+              alt={`${p.name} project screenshot`}
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+          </div>
+
+          <span className="project-num">
+            {String(index + 1).padStart(2, "0")} /{" "}
+            {String(total).padStart(2, "0")}
+          </span>
+        </div>
+
+        <div className="project-info">
+          <span className="eyebrow">{p.category}</span>
+          <h3>{p.name}</h3>
+          <p>{p.desc}</p>
+
+          <div className="tags">
+            {p.tags.map((tag) => (
+              <span key={tag}>{tag}</span>
+            ))}
+          </div>
+
+          <div className="project-actions">
+            {p.url && (
+              <a
+                className="project-link"
+                href={p.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LIVE WEBSITE <FiArrowUpRight />
+              </a>
+            )}
+
+            {p.github && (
+              <a
+                className="project-link"
+                href={p.github}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FiGithub /> GITHUB <FiArrowUpRight />
+              </a>
+            )}
+
+            {!p.url && !p.github && (
+              <span className="project-private">
+                INTERNAL / PRIVATE PROJECT
+              </span>
+            )}
+          </div>
+        </div>
+      </article>
+    </motion.div>
+  );
+}
+
+function CinematicProjects({ projects, reducedMotion }) {
+  const trackRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const { scrollYProgress } = useScroll({
+    target: trackRef,
+    offset: ["start start", "end end"],
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    const nextIndex = Math.min(
+      projects.length - 1,
+      Math.max(0, Math.round(value * (projects.length - 1))),
+    );
+
+    setActiveIndex((current) => (current === nextIndex ? current : nextIndex));
+  });
+
+  return (
+    <div
+      ref={trackRef}
+      className="cinematic-showcase-track"
+      style={{
+        "--project-count": projects.length,
+      }}
+    >
+      <div className="cinematic-showcase-sticky">
+        {projects.map((project, index) => (
+          <CinematicProject
+            key={project.n}
+            project={project}
+            index={index}
+            total={projects.length}
+            progress={scrollYProgress}
+            reducedMotion={reducedMotion}
+            activeIndex={activeIndex}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [menu, setMenu] = useState(false);
-  const [showAllProjects, setShowAllProjects] = useState(false);
-  const visibleWork = showAllProjects ? work : work.slice(0, 3);
+  const visibleWork = work;
+  // One pinned scene: zoom first, then crossfade into Introduction.
+  const sceneRef = useRef(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sceneRef,
+    offset: ["start 96px", "end end"],
+  });
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 180,
+    damping: 42,
+    mass: 0.4,
+  });
+  const zoom = useTransform(
+    progress,
+    [0, 0.18, 0.48, 0.72, 0.8, 1],
+    [1, 1.2, 2.5, 5, 7, 7],
+  );
+  const heroFade = useTransform(progress, [0, 0.79, 0.94], [1, 1, 0]);
+  const introFade = useTransform(progress, [0, 0.8, 0.96], [0, 0, 1]);
+  const introRise = useTransform(progress, [0.8, 0.96], [45, 0]);
+  const introPointerEvents = useTransform(progress, (value) =>
+    value > 0.91 ? "auto" : "none",
+  );
+  const detailFade = useTransform(progress, [0, 0.12, 0.28], [1, 1, 0]);
 
   return (
     <div className="site">
@@ -245,208 +405,150 @@ export default function App() {
         </div>
       </header>
       <main>
-        <section className="hero" id="home">
-          <div className="hero-noise" />
-          <div className="hero-meta">
-            <span>
-              <i className="status-dot" /> AVAILABLE FOR OPPORTUNITIES
-            </span>
-            <span>
-              BASED IN THE PHILIPPINES <b>↗</b> WORKING WORLDWIDE
-            </span>
-          </div>
-          <div className="hero-center hero-editorial">
-            <div className="hero-copy">
-              <p className="hero-kicker">
-                FULL-STACK SOFTWARE DEVELOPER <span> / </span> PORTFOLIO 2026
-              </p>
-              <h1>
-                <span>BUILDING</span>
-                <span>WHAT'S</span>
+        <div ref={sceneRef} className="hero-zoom-track" id="home">
+          <div className="cinematic-scene">
+            <section className="hero hero-zoom">
+              <div className="hero-noise" />
+              <motion.div
+                className="hero-meta"
+                style={reduceMotion ? {} : { opacity: detailFade }}
+              >
                 <span>
-                  NEXT<span className="hero-period">.</span>
+                  <i className="status-dot" /> AVAILABLE FOR OPPORTUNITIES
                 </span>
-              </h1>
-              <p className="hero-intro">
-                I'm <strong>Shem Regidor</strong> — a software developer
-                crafting purposeful products across web, mobile, and systems
-                engineering.
-              </p>
-              <div className="hero-cta-row">
-                <a href="#work" className="hero-primary">
-                  VIEW MY WORK <FiArrowUpRight />
-                </a>
-                <a href="#about" className="hero-secondary">
-                  MORE ABOUT ME <FiArrowDown />
-                </a>
+                <span>
+                  BASED IN THE PHILIPPINES <b>↗</b> WORKING WORLDWIDE
+                </span>
+              </motion.div>
+              <motion.div
+                className="hero-center hero-editorial hero-zoom-content"
+                style={reduceMotion ? {} : { scale: zoom, opacity: heroFade }}
+              >
+                <div className="hero-copy">
+                  <p className="hero-kicker">
+                    FULL-STACK SOFTWARE DEVELOPER <span> / </span> PORTFOLIO
+                    2026
+                  </p>
+                  <h1>
+                    <span>BUILDING</span>
+                    <span>WHAT'S</span>
+                    <span>
+                      NEXT<span className="hero-period">.</span>
+                    </span>
+                  </h1>
+                  <p className="hero-intro">
+                    I'm <strong>Shem Regidor</strong> — a software developer
+                    crafting purposeful products across web, mobile, and systems
+                    engineering.
+                  </p>
+                  <div className="hero-cta-row">
+                    <a href="#work" className="hero-primary">
+                      VIEW MY WORK <FiArrowUpRight />
+                    </a>
+                    <a href="#about" className="hero-secondary">
+                      MORE ABOUT ME <FiArrowDown />
+                    </a>
+                  </div>
+                  <div className="hero-what-i-do">
+                    <p className="eyebrow">WHAT I DO</p>
+                    <p>
+                      I build purposeful digital products—from elegant
+                      interfaces to reliable systems.
+                    </p>
+                  </div>
+                </div>
+                <div className="hero-video-composition">
+                  <div className="hero-video-frame">
+                    <video
+                      className="hero-video"
+                      src="/videos/shem_python_hero.mp4"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                    />
+                  </div>
+                  <span className="portrait-corner portrait-corner-tl" />
+                  <span className="portrait-corner portrait-corner-br" />
+                  <div className="hero-video-stamp">
+                    SHEM REGIDOR <span>/ SOFTWARE DEVELOPER</span>
+                  </div>
+                  <div className="hero-video-number">01 — 26</div>
+                </div>
+                <div className="hero-signature" aria-hidden="true">
+                  SR / DEV
+                </div>
+              </motion.div>
+              <div className="hero-index">01 / 05</div>
+            </section>
+            <motion.section
+              className="intro section intro-reveal"
+              id="about"
+              style={
+                reduceMotion
+                  ? {}
+                  : {
+                      opacity: introFade,
+                      y: introRise,
+                      pointerEvents: introPointerEvents,
+                    }
+              }
+            >
+              <div className="section-heading">
+                <span className="eyebrow">01 / INTRODUCTION</span>
+                <span className="rule" />
               </div>
-            </div>
-            <div className="portrait-composition">
-              <div className="portrait-frame">
-                <img
-                  src={portrait}
-                  alt="Shem Regidor working on a laptop"
-                  fetchPriority="high"
-                />
+              <div className="intro-layout">
+                <h2>
+                  BUILDING
+                  <br />
+                  <span>WITH PURPOSE.</span>
+                </h2>
+                <div className="intro-copy">
+                  <p>
+                    I'm a software developer who enjoys turning complex problems
+                    into thoughtful, practical digital experiences.
+                  </p>
+                  <p>
+                    My work spans full-stack web applications, mobile products,
+                    internal government systems, and tools that help people get
+                    things done.
+                  </p>
+                  <a href="#contact" className="text-link">
+                    LET'S WORK TOGETHER <FiArrowUpRight />
+                  </a>
+                </div>
               </div>
-              <span className="portrait-corner portrait-corner-tl" />
-              <span className="portrait-corner portrait-corner-br" />
-              <div className="portrait-stamp">
-                SHEM REGIDOR <span> / SOFTWARE ENGINEER</span>
-              </div>
-              <div className="portrait-number">01 — 26</div>
-            </div>
-            <div className="hero-signature" aria-hidden="true">
-              SR / DEV
-            </div>
+            </motion.section>
           </div>
-          <div className="hero-bottom">
-            <div>
-              <p className="eyebrow">WHAT I DO</p>
-              <p>
-                I build purposeful digital products—
-                <br />
-                from elegant interfaces to reliable systems.
-              </p>
-            </div>
-            <a href="#work" className="explore">
-              EXPLORE SELECTED WORK{" "}
-              <span>
-                <FiArrowDown />
-              </span>
-            </a>
-          </div>
-          <div className="hero-index">01 / 05</div>
-        </section>
-        <section className="intro section" id="about">
-          <Reveal>
+        </div>
+        <section className="work-cinematic" id="work">
+          <div className="work-intro section">
             <div className="section-heading">
-              <span className="eyebrow">01 / INTRODUCTION</span>
+              <span className="eyebrow">02 / SELECTED WORK</span>
               <span className="rule" />
+              <span className="small-count">2025 — 2026</span>
             </div>
-            <div className="intro-layout">
-              <h2>
-                BUILDING
-                <br />
-                <span>WITH PURPOSE.</span>
-              </h2>
-              <div className="intro-copy">
-                <p>
-                  I'm a software developer who enjoys turning complex problems
-                  into thoughtful, practical digital experiences.
-                </p>
-                <p>
-                  My work spans full-stack web applications, mobile products,
-                  internal government systems, and tools that help people get
-                  things done.
-                </p>
-                <a href="#contact" className="text-link">
-                  LET'S WORK TOGETHER <FiArrowUpRight />
-                </a>
-              </div>
-            </div>
-          </Reveal>
-        </section>
-        <section className="work section" id="work">
-          <div className="section-heading">
-            <span className="eyebrow">02 / SELECTED WORK</span>
-            <span className="rule" />
-            <span className="small-count">2025 — 2026</span>
-          </div>
-          <Reveal>
+
             <div className="work-heading">
               <h2>
-                {showAllProjects ? "ALL" : "FEATURED"}
+                ALL
                 <br />
                 <span>PROJECTS.</span>
               </h2>
+
               <p>
                 A selection of applications and platforms built around real
                 problems, real workflows, and real people.
               </p>
             </div>
-          </Reveal>
-          <div className="project-list" id="portfolio-project-list">
-            {visibleWork.map((p, i) => (
-              <Reveal key={p.n} delay={0.04}>
-                <article className="project">
-                  <div
-                    className={`project-visual ${p.mobile ? "project-visual-mobile" : ""}`}
-                  >
-                    <div
-                      className={
-                        p.mobile ? "phone-frame" : "project-image-frame"
-                      }
-                    >
-                      <img
-                        src={p.img}
-                        alt={`${p.name} project screenshot`}
-                        loading="lazy"
-                      />
-                    </div>
-                    <span className="project-num">
-                      {p.n} / {String(work.length).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <div className="project-info">
-                    <span className="eyebrow">{p.category}</span>
-                    <h3>{p.name}</h3>
-                    <p>{p.desc}</p>
-                    <div className="tags">
-                      {p.tags.map((t) => (
-                        <span key={t}>{t}</span>
-                      ))}
-                    </div>
-                    <div className="project-actions">
-                      {p.url && (
-                        <a
-                          className="project-link"
-                          href={p.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          LIVE WEBSITE <FiArrowUpRight />
-                        </a>
-                      )}
-                      {p.github && (
-                        <a
-                          className="project-link"
-                          href={p.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <FiGithub /> GITHUB <FiArrowUpRight />
-                        </a>
-                      )}
-                      {!p.url && !p.github && (
-                        <span className="project-private">
-                          INTERNAL / PRIVATE PROJECT
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
           </div>
-          <div className="work-more">
-            <button
-              type="button"
-              className="work-more-button"
-              onClick={() => setShowAllProjects((previous) => !previous)}
-              aria-expanded={showAllProjects}
-              aria-controls="portfolio-project-list"
-            >
-              <span>
-                {showAllProjects ? "SHOW FEATURED WORK" : "VIEW ALL PROJECTS"}
-              </span>
-              <FiArrowUpRight aria-hidden="true" />
-            </button>
-            <span className="work-more-count">
-              {String(visibleWork.length).padStart(2, "0")} /{" "}
-              {String(work.length).padStart(2, "0")} PROJECTS
-            </span>
-          </div>
+
+          <CinematicProjects
+            projects={visibleWork}
+            reducedMotion={reduceMotion}
+          />
         </section>
         <section className="experience section" id="experience">
           <div className="section-heading">
